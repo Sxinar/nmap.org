@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nmap: the Network Mapper - Free Security Scanner</title>
+<meta name="description" content="Nmap Free Security Scanner, Port Scanner, &amp; Network Exploration Tool. Download open source software for Linux, Windows, UNIX, FreeBSD, etc.">
+<meta name="keywords" content="Nmap,Security Scanner,Port Scanner,Network Security,Hacking">
+
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://nmap.org/",
+  "image": "https://nmap.org/images/sitelogo.png",
+  "potentialAction": {
+   "@type": "SearchAction",
+   "target": {
+    "@type": "EntryPoint",
+    "urlTemplate": "https://nmap.org/search.html?q={term}"
+   },
+   "query-input": "required name=term"
+  }
+}
+</script>
+<link rel="publisher" href="https://plus.google.com/+nmap" />
+<link rel="canonical" href="index.html" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#2A0D45">
+<link rel="preload" as="image" href="images/sitelogo.png" imagesizes="168px" imagesrcset="images/sitelogo.png, images/sitelogo-2x.png 2x">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<!--Google Analytics Code-->
+<link rel="preload" href="https://www.google-analytics.com/analytics.js" as="script">
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-11009417-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!--END Google Analytics Code-->
+<meta name="ROBOTS" content="NOARCHIVE">
+<link rel="shortcut icon" href="shared/images/tiny-eyeicon.png" type="image/png">
+</head>
+<body class="bg-[#0b0510] text-slate-300 font-sans antialiased selection:bg-purple-500/30 selection:text-purple-200">
+
+<header class="border-b border-purple-900/40 bg-[#160824]/90 backdrop-blur-md sticky top-0 z-50 shadow-sm shadow-purple-900/10">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
+    <a href="index.html" aria-label="Home page" class="flex-shrink-0 transition-opacity hover:opacity-80">
+      <img alt="Home page logo" srcset="images/sitelogo.png, images/sitelogo-2x.png 2x" src="images/sitelogo.png" class="h-10 sm:h-14 w-auto drop-shadow-md" onerror="this.onerror=null;this.srcset=this.src" height="90" width="168">
+    </a>
+
+    <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-400">
+      <a href="index.html" class="text-purple-400">Nmap.org</a>
+      <a href="https://npcap.com/" class="hover:text-purple-300 transition-colors duration-200">Npcap.com</a>
+      <a href="https://seclists.org/" class="hover:text-purple-300 transition-colors duration-200">Seclists.org</a>
+      <a href="https://sectools.org" class="hover:text-purple-300 transition-colors duration-200">Sectools.org</a>
+      <a href="https://insecure.org/" class="hover:text-purple-300 transition-colors duration-200">Insecure.org</a>
+    </nav>
+
+    <form action="https://nmap.org/search/" class="flex relative w-full md:w-auto">
+      <input name="q" type="search" placeholder="Site Search" class="w-full md:w-48 bg-[#0b0510] border border-purple-900/50 text-slate-200 text-sm rounded px-3 py-2 focus:outline-none focus:border-purple-500/60 focus:ring-1 focus:ring-purple-500/60 transition-all placeholder:text-slate-600">
+      <button title="Search" class="absolute right-0 top-0 h-full px-3 text-purple-700 hover:text-purple-400 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </button>
+    </form>
+  </div>
+</header>
+
+<nav class="bg-[#12061e] border-b border-purple-900/30">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-auto custom-scrollbar">
+    <div class="flex space-x-8 py-3 text-sm font-medium text-slate-400 whitespace-nowrap">
+      <a href="download.html" class="hover:text-purple-300 transition-colors duration-200">Download</a>
+      <a href="book/man.html" class="hover:text-purple-300 transition-colors duration-200">Reference Guide</a>
+      <a href="book/index.html" class="hover:text-purple-300 transition-colors duration-200">Book</a>
+      <a href="docs.html" class="hover:text-purple-300 transition-colors duration-200">Docs</a>
+      <a href="zenmap/index.html" class="hover:text-purple-300 transition-colors duration-200">Zenmap GUI</a>
+      <a href="movies/index.html" class="hover:text-purple-300 transition-colors duration-200">In the Movies</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+    
+    <!-- Left Column (Content) -->
+    <div class="lg:col-span-8 space-y-12">
+      <section>
+        <h1 id="intro" class="text-2xl sm:text-3xl font-bold text-purple-100 mb-6 pb-4 border-b border-purple-900/40">Nmap: Discover your network</h1>
+        
+        <div class="prose prose-invert prose-slate max-w-none text-slate-300 leading-relaxed space-y-6">
+          <p>Nmap ("Network Mapper") is a <a href="npsl/index.html" class="text-purple-400 hover:text-purple-300 underline underline-offset-4 decoration-purple-500/40">free and open source</a> utility for network discovery and security auditing. Many systems and network administrators also find it useful for tasks such as network inventory, managing service upgrade schedules, and monitoring host or service uptime. Nmap uses raw IP packets in novel ways to determine what hosts are available on the network, what services (application name and version) those hosts are offering, what operating systems (and OS versions) they are running, what type of packet filters/firewalls are in use, and dozens of other characteristics. It was designed to rapidly scan large networks, but works fine against single hosts. Nmap runs on all major computer operating systems, and official binary packages are available for Linux, Windows, and Mac OS X. In addition to the classic command-line Nmap executable, the Nmap suite includes an advanced GUI and results viewer (<a href="zenmap/index.html" class="text-purple-400 hover:text-purple-300 hover:underline">Zenmap</a>), a flexible data transfer, redirection, and debugging tool (<a href="ncat/index.html" class="text-purple-400 hover:text-purple-300 hover:underline">Ncat</a>), a utility for comparing scan results (<a href="ndiff/index.html" class="text-purple-400 hover:text-purple-300 hover:underline">Ndiff</a>), and a packet generation and response analysis tool (<a href="nping/index.html" class="text-purple-400 hover:text-purple-300 hover:underline">Nping</a>).</p>
+          
+          <p>Nmap was named &ldquo;Security Product of the Year&rdquo; by Linux Journal, Info World, LinuxQuestions.Org, and Codetalker Digest. It was even featured in <a href="movies/index.html" class="text-purple-400 hover:text-purple-300 hover:underline">twelve movies</a>, including <a href="movies/index.html#matrix" class="text-purple-400 hover:text-purple-300 hover:underline">The Matrix Reloaded</a>, <a href="movies/index.html#diehard4" class="text-purple-400 hover:text-purple-300 hover:underline">Die Hard 4</a>, <a href="movies/index.html#gwtdt" class="text-purple-400 hover:text-purple-300 hover:underline">Girl With the Dragon Tattoo</a>, and <a href="movies/index.html#bourne" class="text-purple-400 hover:text-purple-300 hover:underline">The Bourne Ultimatum</a>.</p>
+        </div>
+
+        <div class="mt-10">
+          <p class="text-lg font-medium text-purple-200 mb-6">Nmap is ...</p>
+          <ul vocab="http://schema.org/" typeof="SoftwareApplication" class="space-y-6">
+            <li style="display:none">
+              <span property="name">Nmap</span>
+              <span property="applicationCategory">Security</span>
+              <span property="applicationSubCategory">Port Scanner</span>
+            </li>
+            
+            <li class="flex items-start">
+              <span class="text-purple-500 font-mono mr-3 mt-1 shrink-0 select-none">&gt;_</span>
+              <div><strong class="text-purple-100 font-semibold tracking-wide">Flexible</strong>: Supports dozens of advanced techniques for mapping out networks filled with IP filters, firewalls, routers, and other obstacles. This includes many <a href="book/man-port-scanning-techniques.html" class="text-purple-400 hover:text-purple-300 hover:underline">port scanning</a> mechanisms (both TCP &amp; UDP), <a href="book/osdetect.html" class="text-purple-400 hover:text-purple-300 hover:underline">OS detection</a>, <a href="book/vscan.html" class="text-purple-400 hover:text-purple-300 hover:underline">version detection</a>, ping sweeps, and more. See the <a href="docs.html" class="text-purple-400 hover:text-purple-300 hover:underline">documentation page</a>.</div>
+            </li>
+            
+            <li class="flex items-start">
+              <span class="text-purple-500 font-mono mr-3 mt-1 shrink-0 select-none">&gt;_</span>
+              <div><strong class="text-purple-100 font-semibold tracking-wide">Powerful</strong>: Nmap has been used to scan huge networks of literally hundreds of thousands of machines.</div>
+            </li>
+            
+            <li class="flex items-start">
+              <span class="text-purple-500 font-mono mr-3 mt-1 shrink-0 select-none">&gt;_</span>
+              <div><strong class="text-purple-100 font-semibold tracking-wide">Portable</strong>: Most operating systems are supported, including <span property="operatingSystem">Linux</span>, <span property="operatingSystem">Microsoft Windows</span>, <span property="operatingSystem">FreeBSD</span>, <span property="operatingSystem">OpenBSD</span>, <span property="operatingSystem">Solaris</span>, <span property="operatingSystem">IRIX</span>, <span property="operatingSystem">Mac OS X</span>, <span property="operatingSystem">HP-UX</span>, <span property="operatingSystem">NetBSD</span>, <span property="operatingSystem">Sun OS</span>, <span property="operatingSystem">Amiga</span>, and more.</div>
+            </li>
+            
+            <li class="flex items-start">
+              <span class="text-purple-500 font-mono mr-3 mt-1 shrink-0 select-none">&gt;_</span>
+              <div><strong class="text-purple-100 font-semibold tracking-wide">Easy</strong>: While Nmap offers a rich set of advanced features for power users, you can start out as simply as <code class="font-mono text-purple-300 bg-purple-950/60 border border-purple-800/50 px-1.5 py-0.5 rounded text-sm">"nmap&nbsp;-v&nbsp;-A&nbsp;<i class="not-italic opacity-80">targethost</i>"</code>. Both traditional command line and graphical (GUI) versions are available to suit your preference. Binaries are available for those who do not wish to compile Nmap from source.</div>
+            </li>
+            
+            <li class="flex items-start">
+              <span class="text-purple-500 font-mono mr-3 mt-1 shrink-0 select-none">&gt;_</span>
+              <div><strong class="text-purple-100 font-semibold tracking-wide">Free</strong>: The primary goals of the Nmap Project is to help make the Internet a little more secure and to provide administrators/auditors/hackers with an advanced tool for exploring their networks. Nmap is available for <a href="download.html" property="downloadUrl" class="text-purple-400 hover:text-purple-300 hover:underline">free download</a>, and also comes with full source code that you may modify and redistribute under the terms of the <a href="https://nmap.org/data/COPYING" property="license" class="text-purple-400 hover:text-purple-300 hover:underline">license</a>.</div>
+            </li>
+            
+            <li class="flex items-start">
+              <span class="text-purple-500 font-mono mr-3 mt-1 shrink-0 select-none">&gt;_</span>
+              <div><strong class="text-purple-100 font-semibold tracking-wide">Well Documented</strong>: Significant effort has been put into comprehensive and up-to-date man pages, whitepapers, tutorials, and even a whole book! Find them in multiple languages <a href="docs.html" class="text-purple-400 hover:text-purple-300 hover:underline">here</a>.</div>
+            </li>
+            
+            <li class="flex items-start">
+              <span class="text-purple-500 font-mono mr-3 mt-1 shrink-0 select-none">&gt;_</span>
+              <div><strong class="text-purple-100 font-semibold tracking-wide">Supported</strong>: While Nmap comes with no warranty, it is well supported by a vibrant community of developers and users. Most of this interaction occurs on the <a href="#lists" class="text-purple-400 hover:text-purple-300 hover:underline">Nmap mailing lists</a>. Most bug reports and questions should be sent to the <a href="https://seclists.org/nmap-dev" class="text-purple-400 hover:text-purple-300 hover:underline">nmap-dev list</a>, but only after you read the <a href="book/man-bugs.html" class="text-purple-400 hover:text-purple-300 hover:underline">guidelines</a>. We recommend that all users subscribe to the low-traffic <a href="https://seclists.org/nmap-hackers" class="text-purple-400 hover:text-purple-300 hover:underline">nmap-hackers</a> announcement list. You can also find Nmap on <a href="http://facebook.com/nmap" class="text-purple-400 hover:text-purple-300 hover:underline">Facebook</a> and <a href="http://twitter.com/nmap" class="text-purple-400 hover:text-purple-300 hover:underline">Twitter</a>. For real-time chat, join the #nmap channel on <a href="http://freenode.net/" class="text-purple-400 hover:text-purple-300 hover:underline">Freenode</a> or <a href="http://www.efnet.org/" class="text-purple-400 hover:text-purple-300 hover:underline">EFNet</a>.</div>
+            </li>
+            
+            <li class="flex items-start">
+              <span class="text-purple-500 font-mono mr-3 mt-1 shrink-0 select-none">&gt;_</span>
+              <div><strong class="text-purple-100 font-semibold tracking-wide">Acclaimed</strong>: Nmap has won numerous awards, including <span property="award" class="italic text-purple-300/70">"Information Security Product of the Year" by Linux Journal</span>, Info World and Codetalker Digest. It has been featured in hundreds of magazine articles, several movies, dozens of books, and one comic book series. Visit the <a href="nmap_inthenews.html" class="text-purple-400 hover:text-purple-300 hover:underline">press page</a> for further details.</div>
+            </li>
+            
+            <li class="flex items-start">
+              <span class="text-purple-500 font-mono mr-3 mt-1 shrink-0 select-none">&gt;_</span>
+              <div><strong class="text-purple-100 font-semibold tracking-wide">Popular</strong>: Thousands of people download Nmap every day, and it is included with many operating systems (Redhat Linux, Debian Linux, Gentoo, FreeBSD, OpenBSD, etc). It is among the top ten (out of 30,000) programs at the Freshmeat.Net repository. This is important because it lends Nmap its vibrant development and user support communities.</div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="lists" class="text-2xl sm:text-3xl font-bold text-purple-100 mb-6 pb-4 border-b border-purple-900/40">Communication</h2>
+        
+        <div class="prose prose-invert prose-slate max-w-none text-slate-300 leading-relaxed space-y-6">
+          <p>Nmap users are encouraged to subscribe to the <i class="text-purple-200">Nmap-hackers</i> mailing list. It is a low volume (6 posts in 2017), moderated list for the most important announcements about Nmap, Insecure.org, and related projects. You can join more than 128,000 current subscribers by submitting your email address here:</p>
+
+          <form method="POST" action="https://nmap.org/mailman/subscribe/announce" class="bg-[#12061e] border border-purple-900/40 p-5 rounded-lg">
+            <div class="flex flex-col sm:flex-row gap-3 items-center">
+              <input type="text" name="email" value="" placeholder="Your email address" class="w-full sm:flex-1 bg-[#0b0510] border border-purple-800/60 text-slate-200 rounded px-4 py-2 focus:outline-none focus:border-purple-500/60 focus:ring-1 focus:ring-purple-500/60 placeholder:text-slate-600 transition-all">
+              <input type="submit" name="email-button" value="Subscribe to Nmap-hackers" class="w-full sm:w-auto bg-[#2A0D45] hover:bg-purple-800 border border-purple-600/30 text-purple-50 font-semibold py-2 px-6 rounded cursor-pointer transition-colors shadow-sm text-sm">
+            </div>
+            <div class="mt-3 text-sm text-slate-500 text-center sm:text-left">
+              (or subscribe with custom options from the <a href="https://nmap.org/mailman/listinfo/announce" class="text-purple-400 hover:text-purple-300 hover:underline">Nmap-hackers list info page</a>)
+            </div>
+          </form>
+
+          <p>We also have a development list for more hardcore members (especially programmers) who are interested in helping the project by helping with coding, testing, feature ideas, etc. New (test/beta) versions of Nmap are sometimes released here prior to general availability for QA purposes. You can subscribe at the <a href="https://nmap.org/mailman/listinfo/dev" class="text-purple-400 hover:text-purple-300 hover:underline">Nmap-dev list info page</a>.</p>
+
+          <p>Both lists are archived (along with many other security lists) at <a href="https://seclists.org" class="text-purple-400 hover:text-purple-300 hover:underline">Seclists.org</a>.</p>
+
+          <p>Though it isn't nearly as active as the mailing lists, the official IRC channel is #nmap on <a href="http://freenode.net/" class="text-purple-400 hover:text-purple-300 hover:underline">Freenode</a> (irc.freenode.net).</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column (Sidebar) -->
+    <aside class="lg:col-span-4 space-y-8">
+      
+      <!-- Download Box -->
+      <div class="bg-gradient-to-br from-[#1b082e] to-[#0f041b] border border-purple-800/30 p-6 rounded-lg text-center shadow-lg shadow-purple-900/10">
+        <a href="download.html" class="inline-block w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 px-6 rounded transition-colors shadow-md tracking-wide">Get Nmap 7.99 here</a>
+      </div>
+
+      <!-- News Panel -->
+      <section class="bg-[#12061e] border border-purple-900/30 rounded-lg shadow-md shadow-purple-900/5">
+        <h2 id="news" class="text-lg font-bold text-purple-100 px-6 py-4 border-b border-purple-900/30">News</h2>
+        <div class="px-6 py-4">
+          <ul class="space-y-5 text-sm text-slate-400">
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-500 mb-1.5 opacity-80 shadow-[0_0_8px_rgba(168,85,247,0.6)]"></span>
+              Nmap.org has been redesigned! Our new mobile-friendly layout is also on <a href="https://npcap.com" class="text-purple-400 hover:underline">Npcap.com</a>, <a href="https://seclists.org" class="text-purple-400 hover:underline">Seclists.org</a>, <a href="https://insecure.org" class="text-purple-400 hover:underline">Insecure.org</a>, and <a href="https://sectools.org" class="text-purple-400 hover:underline">Sectools.org</a>.
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              Nmap 7.90 has been released with Npcap 1.00 along with dozens of other performance improvements, bug fixes, and feature enhancements! [<a href="https://seclists.org/nmap-announce/2020/1" class="text-purple-400 hover:underline">Release Announcement</a> | <a href="download.html" class="text-purple-400 hover:underline">Download page</a>]
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              After more than 7 years of development and 170 public pre-releases, we're delighted to announce Npcap version 1.00! [<a href="https://seclists.org/nmap-announce/2020/0" class="text-purple-400 hover:underline">Release Announcement</a> | <a href="https://nmap.org/npcap/" class="text-purple-400 hover:underline">Download page</a>]
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              Nmap 7.80 was released for DEFCON 27! [<a href="https://seclists.org/nmap-announce/2019/0" class="text-purple-400 hover:underline">release notes</a> | <a href="download.html" class="text-purple-400 hover:underline">download</a>]
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              Nmap turned 20 years old on September 1, 2017! Celebrate by reading <a href="p51-11.html" class="text-purple-400 hover:underline">the original Phrack #51 article</a>. <a href="https://twitter.com/hashtag/Nmap20" class="text-purple-400 hover:underline">#Nmap20</a>!
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              Nmap 7.50 is now available! [<a href="https://seclists.org/nmap-announce/2017/3" class="text-purple-400 hover:underline">release notes</a> | <a href="download.html" class="text-purple-400 hover:underline">download</a>]
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              Nmap 7 is now available! [<a href="7/index.html" class="text-purple-400 hover:underline">release notes</a> | <a href="download.html" class="text-purple-400 hover:underline">download</a>]
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              We're pleased to release our new and Improved <a href="favicon/index.html" class="text-purple-400 hover:underline">Icons of the Web</a> project&mdash;a 5-gigapixel interactive collage of the top million sites on the Internet!
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              Nmap has been discovered in two new movies! It's used to <a href="movies/index.html#elysium" class="text-purple-400 hover:underline">hack Matt Damon's brain in Elysium</a> and also to <a href="movies/index.html#gijoe" class="text-purple-400 hover:underline">launch nuclear missiles in G.I. Joe: Retaliation</a>!
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              We're delighted to announce Nmap 6.40 with 14 new <a href="book/nse.html" class="text-purple-400 hover:underline">NSE scripts</a>, hundreds of new <a href="book/osdetect.html" class="text-purple-400 hover:underline">OS</a> and <a href="book/vscan.html" class="text-purple-400 hover:underline">version detection</a> signatures, and many great new features! [<a href="https://seclists.org/nmap-announce/2013/1" class="text-purple-400 hover:underline">Announcement/Details</a>], [<a href="download.html" class="text-purple-400 hover:underline">Download Site</a>]
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              We just released Nmap 6.25 with 85 new NSE scripts, performance improvements, better OS/version detection, and more! [<a href="https://seclists.org/nmap-hackers/2012/4" class="text-purple-400 hover:underline">Announcement/Details</a>], [<a href="download.html" class="text-purple-400 hover:underline">Download Site</a>]
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              Any release as big as Nmap 6 is bound to uncover a few bugs. We've now fixed them with <a href="https://seclists.org/nmap-hackers/2012/3" class="text-purple-400 hover:underline">Nmap 6.01</a>!
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              Nmap 6 is now available! [<a href="6/index.html" class="text-purple-400 hover:underline">release notes</a> | <a href="download.html" class="text-purple-400 hover:underline">download</a>]
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              The security community has spoken! 3,000 of you shared favorite security tools for our relaunched <a href="https://sectools.org" class="text-purple-400 hover:underline">SecTools.Org</a>. It is sort of like Yelp for security tools. Are you familiar with all of the <a href="https://sectools.org/tag/new/" class="text-purple-400 hover:underline">49 new tools</a> in this edition?
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              <a href="https://seclists.org/nmap-hackers/2011/0" class="text-purple-400 hover:underline">Nmap 5.50 Released</a>: Now with Gopher protocol support! Our first stable release in a year includes 177 NSE scripts, 2,982 OS fingerprints, and 7,319 version detection signatures. Release focuses were the Nmap Scripting Engine, performance, Zenmap GUI, and the Nping packet analysis tool. [<a href="download.html" class="text-purple-400 hover:underline">Download page</a> | <a href="https://seclists.org/nmap-hackers/2011/0" class="text-purple-400 hover:underline">Release notes</a>]
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              Those who missed Defcon can now watch Fyodor and David Fifield demonstrate the power of the Nmap Scripting Engine. They give an overview of NSE, use it to explore Microsoft's global network, write an NSE script from scratch, and hack a webcam--all in 38 minutes! (<a href="presentations/BHDC10/index.html" class="text-purple-400 hover:underline">Presentation video</a>)
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              <i>Icons of the Web</i>: explore favicons for the top million web sites with our <a href="favicon" class="text-purple-400 hover:underline">new poster and online viewer</a>.
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              We're delighted to announce the immediate, free availability of the <a href="5/index.html" class="text-purple-400 hover:underline">Nmap Security Scanner version 5.00</a>. Don't miss the <a href="5/index.html#5changes" class="text-purple-400 hover:underline">top 5 improvements in Nmap 5</a>.
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              After years of effort, we are delighted to release <a href="book/index.html" class="text-purple-400 hover:underline">Nmap Network Scanning: The Official Nmap Project Guide to Network Discovery and Security Scanning</a>!
+            </li>
+            <li>
+              <span class="block w-2 h-2 rounded-full bg-purple-900 mb-1.5"></span>
+              We now have an active Nmap <a href="http://facebook.com/nmap" class="text-purple-400 hover:underline">Facebook page</a> and <a href="http://twitter.com/nmap/" class="text-purple-400 hover:underline">Twitter feed</a> to augment the <a href="#lists" class="text-purple-400 hover:underline">mailing lists</a>. All of these options offer RSS feeds as well.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </aside>
+  </div>
+</main>
+
+<footer class="bg-[#0b0510] border-t border-purple-900/30 py-12 mt-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
+      
+      <div>
+        <h2 class="text-sm font-bold text-purple-200 uppercase tracking-wider mb-4"><a href="index.html" class="hover:text-purple-400 transition-colors">Nmap Security Scanner</a></h2>
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li><a href="book/man.html" class="hover:text-purple-400 transition-colors">Ref Guide</a></li>
+          <li><a href="book/install.html" class="hover:text-purple-400 transition-colors">Install Guide</a></li>
+          <li><a href="docs.html" class="hover:text-purple-400 transition-colors">Docs</a></li>
+          <li><a href="download.html" class="hover:text-purple-400 transition-colors">Download</a></li>
+          <li><a href="oem/index.html" class="hover:text-purple-400 transition-colors">Nmap OEM</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-bold text-purple-200 uppercase tracking-wider mb-4"><a href="https://npcap.com/" class="hover:text-purple-400 transition-colors">Npcap packet capture</a></h2>
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li><a href="https://npcap.com/guide/" class="hover:text-purple-400 transition-colors">User's Guide</a></li>
+          <li><a href="https://npcap.com/guide/npcap-devguide.html#npcap-api#npcap-api" class="hover:text-purple-400 transition-colors">API docs</a></li>
+          <li><a href="https://npcap.com/#download#download" class="hover:text-purple-400 transition-colors">Download</a></li>
+          <li><a href="https://npcap.com/oem/" class="hover:text-purple-400 transition-colors">Npcap OEM</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-bold text-purple-200 uppercase tracking-wider mb-4"><a href="https://seclists.org/" class="hover:text-purple-400 transition-colors">Security Lists</a></h2>
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li><a href="https://seclists.org/nmap-announce/" class="hover:text-purple-400 transition-colors">Nmap Announce</a></li>
+          <li><a href="https://seclists.org/nmap-dev/" class="hover:text-purple-400 transition-colors">Nmap Dev</a></li>
+          <li><a href="https://seclists.org/fulldisclosure/" class="hover:text-purple-400 transition-colors">Full Disclosure</a></li>
+          <li><a href="https://seclists.org/oss-sec/" class="hover:text-purple-400 transition-colors">Open Source Security</a></li>
+          <li><a href="https://seclists.org/dataloss/" class="hover:text-purple-400 transition-colors">BreachExchange</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-bold text-purple-200 uppercase tracking-wider mb-4"><a href="https://sectools.org" class="hover:text-purple-400 transition-colors">Security Tools</a></h2>
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li><a href="https://sectools.org/tag/vuln-scanners/" class="hover:text-purple-400 transition-colors">Vuln scanners</a></li>
+          <li><a href="https://sectools.org/tag/pass-audit/" class="hover:text-purple-400 transition-colors">Password audit</a></li>
+          <li><a href="https://sectools.org/tag/web-scanners/" class="hover:text-purple-400 transition-colors">Web scanners</a></li>
+          <li><a href="https://sectools.org/tag/wireless/" class="hover:text-purple-400 transition-colors">Wireless</a></li>
+          <li><a href="https://sectools.org/tag/sploits/" class="hover:text-purple-400 transition-colors">Exploitation</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-bold text-purple-200 uppercase tracking-wider mb-4"><a href="https://insecure.org/" class="hover:text-purple-400 transition-colors">About</a></h2>
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li><a href="https://insecure.org/fyodor/" class="hover:text-purple-400 transition-colors">About/Contact</a></li>
+          <li><a href="https://insecure.org/privacy.html" class="hover:text-purple-400 transition-colors">Privacy</a></li>
+          <li><a href="https://insecure.org/advertising.html" class="hover:text-purple-400 transition-colors">Advertising</a></li>
+          <li><a href="npsl/index.html" class="hover:text-purple-400 transition-colors">Nmap Public Source License</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="pt-8 border-t border-purple-900/30 flex flex-col md:flex-row items-center justify-between gap-6">
+      <form action="https://nmap.org/search/" class="flex w-full md:w-auto">
+        <input name="q" type="search" placeholder="Site Search" class="w-full md:w-64 bg-[#12061e] border border-purple-900/50 text-slate-200 text-sm rounded-l px-4 py-2 focus:outline-none focus:border-purple-500/60 focus:ring-1 focus:ring-purple-500/60 transition-all placeholder:text-slate-600">
+        <button title="Search" class="bg-[#1e0a30] hover:bg-purple-900 px-4 text-purple-400 hover:text-purple-300 transition-colors border border-l-0 border-purple-900/50 rounded-r">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </button>
+      </form>
+
+      <div class="flex items-center space-x-6">
+        <a href="https://twitter.com/nmap" title="Visit us on Twitter" class="text-slate-500 hover:text-purple-400 transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+        </a>
+        <a href="https://facebook.com/nmap" title="Visit us on Facebook" class="text-slate-500 hover:text-purple-400 transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/></svg>
+        </a>
+        <a href="https://github.com/nmap/" title="Visit us on Github" class="text-slate-500 hover:text-purple-400 transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+        </a>
+        <a href="https://reddit.com/r/nmap/" title="Discuss Nmap on Reddit" class="text-slate-500 hover:text-purple-400 transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.204 14.049c-.06.276-.091.56-.091.847 0 3.408 4.418 6.182 9.877 6.182s9.877-2.774 9.877-6.182c0-.287-.031-.571-.091-.847.46-.382.752-.962.752-1.603 0-1.144-.925-2.072-2.065-2.072-.619 0-1.173.273-1.554.708-1.745-.965-4.103-1.611-6.73-1.692l1.455-4.99 3.513.993c.01.884.729 1.593 1.62 1.593 1.042 0 1.887-.847 1.887-1.892 0-1.044-.845-1.891-1.887-1.891-.884 0-1.614.626-1.83 1.464l-4.004-1.13c-.227-.065-.46.064-.52.29l-1.677 5.765c-2.61.096-4.949.743-6.685 1.7-1.037-.938-2.628-.938-3.665 0-1.043.94-1.043 2.473 0 3.413zm12.398-3.132c.516 0 .935.421.935.94 0 .52-.419.941-.935.941-.516 0-.935-.421-.935-.94 0-.519.419-.94.935-.94zm-5.205 0c.516 0 .935.421.935.94 0 .52-.419.941-.935.941-.516 0-.935-.421-.935-.94 0-.519.419-.94.935-.94zm6.657 4.093c.182.183.182.479 0 .662-1.082 1.086-2.527 1.487-4.054 1.487-1.527 0-2.973-.401-4.054-1.487-.182-.183-.182-.479 0-.662.181-.183.475-.183.657 0 .86.864 2.052 1.213 3.397 1.213 1.345 0 2.537-.349 3.397-1.213.182-.183.476-.183.657 0z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
